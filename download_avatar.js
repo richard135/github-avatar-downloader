@@ -12,7 +12,6 @@ function getRepoContributors(repoOwner, repoName, cb){
                       }
                     }
   request(requestURL, function(err, response, body) {
-    if (err || response.statusCode !=200) throw err;
     var parsed = JSON.parse(body);
     cb(err, parsed);
   });
@@ -32,10 +31,13 @@ function downloadImageByURL(url, filePath){
 
 
 getRepoContributors(myArgs[0], myArgs[1], function(err, result) {
-  console.log("Errors:", err);
-  for (avatar of result) {
-    downloadImageByURL(avatar.avatar_url, avatar.login);
-  }
+    if (myArgs[0] == undefined)
+    return console.log("Please enter the repo owner followed by repo name");
+
+    console.log("Errors:", err);
+    for (avatar of result) {
+      downloadImageByURL(avatar.avatar_url, avatar.login);
+    }
 });
 
 
