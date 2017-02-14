@@ -25,7 +25,7 @@ function downloadImageByURL(url, filePath){
        .on('response', function (response) {                           // Note 3
          console.log('Response Status Code: ', response.statusCode);
        })
-       .pipe(fs.createWriteStream(filePath));
+       .pipe(fs.createWriteStream('avatar/'+filePath+'.jpg'));
 }
 
 
@@ -33,7 +33,7 @@ function downloadImageByURL(url, filePath){
 getRepoContributors("jquery", "jquery", function(err, result) {
   console.log("Errors:", err);
   for (avatar of result) {
-    console.log(avatar.avatar_url);
+    downloadImageByURL(avatar.avatar_url, avatar.login);
   }
 });
 
