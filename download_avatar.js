@@ -10,12 +10,15 @@ function getRepoContributors(repoOwner, repoName, cb){
                       }
                     }
   request(requestURL, function(err, response, body) {
-    if (err) throw err;
-  console.log(body);
-});
+    if (err || response.statusCode !=200) throw err;
+    var parsed = JSON.parse(body);
+    cb(err, parsed);
+  });
 }
 
 getRepoContributors("jquery", "jquery", function(err, result) {
   console.log("Errors:", err);
-  console.log("Result:", result);
+  for (avatar of result) {
+    console.log(avatar.avatar_url);
+  }
 });
