@@ -1,7 +1,9 @@
+require('dotenv').config()
 var request = require('request');
+
 var fs = require('fs');
-var GITHUB_USER = "richard135";
-var GITHUB_TOKEN = "31dda3a1ee7b79cd1419a665e8589d63cbbbe825";
+var GITHUB_USER = process.env.GITHUB_USER;
+var GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 var myArgs = process.argv.slice(2);
 
 
